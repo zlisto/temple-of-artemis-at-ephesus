@@ -1,0 +1,18 @@
+{
+  "protocol": "mvw/0.1",
+  "name": "Temple of Artemis at Ephesus",
+  "description": "The great marble temple of Artemis at Ephesus, with its forest of Ionic columns. Artebubu the priestess tells its story.",
+  "spawns": {
+    "default": "In front of the temple's west front, facing it",
+    "from_square": "In front of the portal back to Metaverse Square, facing into the world"
+  },
+  "portals": [
+    {
+      "id": "to_square",
+      "label": "Metaverse Square",
+      "href": "https://zlisto.github.io/hub_world/",
+      "spawn": "by_temple_of_artemis",
+      "where": "A glowing pink doorway near where you arrive"
+    }
+  ]
+}
