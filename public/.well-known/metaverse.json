@@ -4,7 +4,10 @@
   "description": "The great marble temple of Artemis at Ephesus, with its forest of Ionic columns. Artebubu the priestess tells its story.",
   "spawns": {
     "default": "In front of the temple's west front, facing it",
-    "from_square": "In front of the portal back to Metaverse Square, facing into the world"
+    "from_square": "In front of the portal back to Metaverse Square, facing into the world",
+    "from_hanging_gardens": "Arriving from Hanging Gardens, in front of the portal plaza",
+    "to_statue_of_zeus": "In front of the portal to Statue of Zeus",
+    "from_mausoleum": "Arriving from Mausoleum, in front of the portal plaza"
   },
   "portals": [
     {
@@ -13,6 +16,13 @@
       "href": "https://zlisto.github.io/hub_world/",
       "spawn": "by_temple_of_artemis",
       "where": "A glowing pink doorway near where you arrive"
+    },
+    {
+      "id": "to_statue_of_zeus",
+      "label": "Statue of Zeus",
+      "href": "https://zlisto.github.io/statue-of-zeus-at-olympia/",
+      "spawn": "from_temple_of_artemis",
+      "where": "A tour doorway beside the portal to Metaverse Square (next stop · tour)"
     }
   ]
 }

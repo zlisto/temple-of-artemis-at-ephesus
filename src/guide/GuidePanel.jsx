@@ -1,8 +1,12 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
+import { destinations } from '../network.js'
+import { navigate } from '../mvw.js'
+import { fadeOut, whoosh } from '../audio.js'
 import W from '../wonder.js'
 
 // The chat window that opens when you talk to the guide. Their lines are fixed (wonder.js):
 // you pick a question, it shows up as your message, and the answer follows after a short pause.
+// Destinations from the wonder network get a Go → button, like Labubuldore's world list.
 
 // tiny, safe formatting: **bold**, `code`, "- " bullets, clickable https:// links
 function inline(text) {
@@ -48,6 +52,7 @@ export default function GuidePanel({ visitor, onClose }) {
   const [messages, setMessages] = useState(() => saved ?? [{ who: 'guide', text: W.greeting(visitor) }])
   const [typing, setTyping] = useState(false)
   const log = useRef()
+  const doors = destinations(W.id)
   useEffect(() => {
     saved = messages
     log.current?.scrollTo({ top: log.current.scrollHeight, behavior: 'smooth' })
@@ -67,6 +72,11 @@ export default function GuidePanel({ visitor, onClose }) {
       setMessages((m) => [...m, { who: 'guide', text: fact.a }])
       setTyping(false)
     }, 650)
+  }
+  const go = (d) => {
+    fadeOut()
+    whoosh()
+    navigate(d.href, d.spawn, d.back)
   }
 
   return (
@@ -88,6 +98,21 @@ export default function GuidePanel({ visitor, onClose }) {
           </div>
         ))}
         {typing && <div className="guide-msg tauhid typing">…</div>}
+        {!!doors.length && (
+          <div className="world-list">
+            <p className="world-none">I can send you through a doorway from here:</p>
+            {doors.map((d) => (
+              <div key={d.id} className="world-card ok">
+                <div className="world-head">
+                  <span className="world-dot" />
+                  <b>{d.label}</b>
+                  <button onClick={() => go(d)}>Go →</button>
+                </div>
+                <span className="world-host">{d.sub}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="guide-asks">
         {W.facts.map((f) => (

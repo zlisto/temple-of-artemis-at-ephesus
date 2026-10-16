@@ -5,7 +5,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import Portal from './Portal.jsx'
 import Guide from './guide/Guide.jsx'
 import Scene from './Scene.jsx'
-import { PORTAL } from './layout.js'
+import { DOORS, PORTAL } from './layout.js'
 import W from './wonder.js'
 
 // Everything you see: sky, light and ground from wonder.js, the wonder itself (Scene.jsx), the
@@ -68,6 +68,9 @@ export default function World({ talking = false, onTalk }) {
       <Scene />
       <Guide talking={talking} onTalk={onTalk} />
       <Portal x={PORTAL.x} z={PORTAL.z} rot={PORTAL.rot} href={PORTAL.href} spawn={PORTAL.spawn} back="from_square" label="Metaverse Square" sub="every world · portal" />
+      {DOORS.map((d) => (
+        <Portal key={d.id} x={d.x} z={d.z} rot={d.rot} href={d.href} spawn={d.spawn} back={d.back} label={d.label} sub={d.sub} color={d.color} />
+      ))}
     </>
   )
 }

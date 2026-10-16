@@ -418,6 +418,65 @@ body,
   color: #8f8f9a;
 }
 
+/* ---------- guide click-to-go (same pattern as Labubuldore's world list) */
+.world-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.world-card {
+  padding: 10px 12px;
+  border: 1px solid #2a2a31;
+  border-radius: 12px;
+  background: #16161b;
+}
+
+.world-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.world-head b {
+  flex: 1;
+  font-size: 15px;
+}
+
+.world-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #5fe39b;
+  box-shadow: 0 0 8px #5fe39b;
+  flex: none;
+}
+
+.world-head button {
+  border: 1px solid var(--pink);
+  background: var(--pink);
+  color: var(--black);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.world-host {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #8f8f9a;
+}
+
+.world-none {
+  font-size: 13px;
+  color: #cfcfd6;
+  margin: 0 0 4px;
+}
+
 /* view follows the mouse before the first click: hide the cursor over the world so it feels like mouse-look */
 .freelook canvas {
   cursor: none;

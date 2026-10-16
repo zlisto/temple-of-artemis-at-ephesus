@@ -1,4 +1,5 @@
 import { pickSpawn } from './mvw.js'
+import { arrivalsOf, doorsOf } from './network.js'
 import W from './wonder.js'
 
 // The walkable shape of this world, all read from wonder.js. Units are meters; +x = east, -z = north.
@@ -12,11 +13,16 @@ export const BOUND = W.bound // you can walk anywhere within this distance of th
 // Arrival points (mvw/0.1): ?spawn=<id> picks one. `from_square` is where Metaverse Square's portal
 // lands you, just in front of this world's portal back there.
 export const PORTAL = W.portal
-const ahead = (d) => ({ x: PORTAL.x + Math.sin(PORTAL.rot) * d, z: PORTAL.z + Math.cos(PORTAL.rot) * d })
+export const DOORS = doorsOf(W.id, PORTAL) // themed tour / shortcut doors beside the hub portal
+const ahead = (p, d) => ({ x: p.x + Math.sin(p.rot) * d, z: p.z + Math.cos(p.rot) * d })
 export const SPAWNS = {
   default: W.spawn,
-  from_square: { ...ahead(2.4), yaw: PORTAL.rot + Math.PI }, // in front of the portal, facing away from it
+  from_square: { ...ahead(PORTAL, 2.4), yaw: PORTAL.rot + Math.PI }, // in front of the portal, facing away from it
 }
+// inbound edges share the plaza spot; each outbound door gets a Back spawn in front of it
+for (const id of arrivalsOf(W.id)) SPAWNS[id] = SPAWNS.from_square
+for (const d of DOORS) SPAWNS[d.back] = { ...ahead(d, 2.4), yaw: d.rot + Math.PI }
+
 export const SPAWN = pickSpawn(SPAWNS)
 export const GUIDE = W.guide
 
@@ -80,6 +86,9 @@ export function collide(pos) {
 // where you are, in plain words (sent to the Metaverse Browser with presence())
 export function locate(x, z) {
   if (Math.hypot(x - GUIDE.x, z - GUIDE.z) < 2.6) return `${W.name} · with ${W.guideName}`
+  for (const d of DOORS) {
+    if (Math.hypot(x - d.x, z - d.z) < 3) return `${W.name} · by the portal to ${d.label}`
+  }
   if (Math.hypot(x - PORTAL.x, z - PORTAL.z) < 3) return `${W.name} · by the portal to Metaverse Square`
   for (const a of W.areas ?? []) if (Math.hypot(x - a.x, z - a.z) < a.r) return `${W.name} · ${a.label}`
   return `${W.name} · ${W.elsewhere ?? 'outside'}`
