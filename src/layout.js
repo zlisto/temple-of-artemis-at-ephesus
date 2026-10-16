@@ -7,7 +7,7 @@ import W from './wonder.js'
 
 export const EYE = 1.65
 export const R_PLAYER = 0.35
-export const SPEED = W.speed ?? { walk: 5, run: 9 } // meters per second; Shift runs
+export const SPEED = W.speed ?? { walk: 12, run: 20 } // meters per second; Shift runs
 export const BOUND = W.bound // you can walk anywhere within this distance of the center
 
 // Arrival points (mvw/0.1): ?spawn=<id> picks one. `from_square` is where Metaverse Square's portal

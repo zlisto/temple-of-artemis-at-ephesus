@@ -80,7 +80,7 @@ Today only foundations remain in a marshy field near Selçuk, Turkey, with **a s
   },
 
   env: { sky: '#a6c8e8', fog: '#d6e0d6', fogNear: 110, fogFar: 430, ground: '#a3ad6e', hemiSky: '#fff4e2', hemiGround: '#6f7d4a', sun: [-40, 70, 50], sunIntensity: 1.7 },
-  speed: { walk: 5, run: 9 },
+  speed: { walk: 12, run: 20 },
   bound: 115,
   spawn: { x: 0, z: 66, yaw: 0 },
   portal: { x: -9, z: 72, rot: Math.PI, href: HUB, spawn: 'by_temple_of_artemis' },
